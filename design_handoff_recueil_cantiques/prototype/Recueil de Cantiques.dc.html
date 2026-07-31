@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0&display=block" rel="stylesheet">
+<style>
+:root{
+--pri:oklch(0.53 0.19 258);--onPri:#ffffff;--priC:oklch(0.93 0.049 258);--onPriC:oklch(0.37 0.105 258);
+--priSoft:oklch(0.968 0.023 258);--priBord:oklch(0.875 0.053 258);
+--bg:oklch(0.982 0.008 258);--surf:#ffffff;--surf2:oklch(0.958 0.010 258);--surf3:oklch(0.928 0.014 258);
+--on:oklch(0.21 0.011 258);--on2:oklch(0.47 0.010 258);--on3:oklch(0.63 0.008 258);
+--outline:oklch(0.90 0.010 258);--scrim:rgba(12,16,22,.42);
+--shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.07);
+--gold:oklch(0.72 0.13 70);--goldSoft:oklch(0.968 0.038 82);--goldBord:oklch(0.885 0.065 78);--onGold:oklch(0.42 0.09 70);
+--lyric:19px;--lyricLh:1.66;--htitle:26px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#e8ebf0;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#111}
+a{color:var(--pri);text-decoration:none}
+a:hover{color:var(--onPriC)}
+input{font-family:inherit}
+button{font-family:inherit;-webkit-tap-highlight-color:transparent}
+[data-scroll]::-webkit-scrollbar{width:0;height:0}
+[data-scroll]{scrollbar-width:none}
+[data-icon]{font-family:'Material Symbols Rounded';font-weight:400;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;font-feature-settings:'liga';-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;user-select:none}
+@keyframes rdcIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes rdcFade{from{opacity:0}to{opacity:1}}
+@keyframes rdcSpin{to{transform:rotate(360deg)}}
+@keyframes rdcPop{from{opacity:0;transform:scale(.93) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes rdcRise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes rdcBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes rdcSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+@keyframes rdcBar{from{width:0}to{width:100%}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:28px;padding:32px 28px 48px">
+
+<div style="width:412px;height:900px;flex:none;border-radius:46px;padding:9px;background:linear-gradient(160deg,#c3cad4,#9fa8b6);box-shadow:0 40px 90px -20px rgba(20,28,42,.45),0 4px 10px rgba(20,28,42,.18);position:sticky;top:32px">
+<div style="width:100%;height:100%;border-radius:38px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column;position:relative;color:var(--on)">
+
+<div style="height:34px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:relative;z-index:5">
+<span style="font-size:13px;font-weight:500;color:var(--on)">9:41</span>
+<div style="position:absolute;left:50%;top:6px;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:rgba(0,0,0,.35)"></div>
+<div style="display:flex;align-items:center;gap:5px;color:var(--on)">
+<svg width="14" height="14" viewBox="0 0 16 16"><path d="M14.67 14.67V1.33L1.33 14.67h13.34z" fill="currentColor"/></svg>
+<svg width="14" height="14" viewBox="0 0 16 16"><path d="M8 13.3L.67 5.97a10.37 10.37 0 0114.66 0L8 13.3z" fill="currentColor"/></svg>
+<svg width="14" height="14" viewBox="0 0 16 16"><rect x="3.75" y="2.4" width="8.5" height="12.2" rx="1.6" fill="currentColor"/><rect x="5.6" y="1.1" width="4.8" height="2" rx="0.6" fill="currentColor"/></svg>
+</div>
+</div>
+
+<sc-if value="{{ isAccueil }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Accueil" data-scroll style="flex:1;min-height:0;overflow-y:auto;animation:rdcIn .34s cubic-bezier(.2,.85,.25,1)">
+<div style="padding:6px 20px 18px;display:flex;align-items:center;gap:12px">
+<img src="logo.png" alt="" style="width:42px;height:42px;border-radius:12px;flex:none">
+<div style="flex:1;min-width:0">
+<div style="font-size:19px;font-weight:700;letter-spacing:-.3px;line-height:1.15">Recueil de Cantiques</div>
+<div style="font-size:12.5px;color:var(--on3);margin-top:2px">1<sup>re</sup> édition · Hors ligne</div>
+</div>
+<button onClick="{{ goParams }}" style="width:44px;height:44px;flex:none;border:none;border-radius:22px;background:var(--surf2);color:var(--on2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .12s,background .16s" style-active="transform:scale(.9);background:var(--surf3)">
+<span data-icon style="font-size:22px">tune</span>
+</button>
+</div>
+
+<div style="margin:0 20px;padding:20px;border-radius:26px;background:var(--priC);color:var(--onPriC);position:relative;overflow:hidden">
+<div style="position:absolute;right:-28px;top:-26px;width:120px;height:120px;border-radius:50%;background:var(--pri);opacity:.09"></div>
+<div style="display:flex;align-items:flex-end;gap:18px;position:relative">
+<div>
+<div style="font-family:Literata,serif;font-size:46px;font-weight:600;line-height:1;letter-spacing:-1.5px">{{ nbCantiques }}</div>
+<div style="font-size:13px;font-weight:500;margin-top:5px;opacity:.85">cantiques</div>
+</div>
+<div style="width:1px;height:42px;background:currentColor;opacity:.18;margin-bottom:4px"></div>
+<div>
+<div style="font-family:Literata,serif;font-size:30px;font-weight:600;line-height:1;letter-spacing:-.8px">{{ nbChoeurs }}</div>
+<div style="font-size:13px;font-weight:500;margin-top:5px;opacity:.85">chœurs</div>
+</div>
+</div>
+<div style="display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:7px 12px 7px 10px;border-radius:100px;background:var(--surf);color:var(--on2);font-size:12px;font-weight:500;position:relative">
+<span data-icon style="font-size:16px;color:var(--pri)">cloud_off</span>Disponible sans connexion
+</div>
+</div>
+
+<button onClick="{{ openDlg }}" style="margin:16px 20px 0;width:calc(100% - 40px);height:60px;border:none;border-radius:20px;background:var(--pri);color:var(--onPri);display:flex;align-items:center;gap:14px;padding:0 18px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s" style-active="transform:scale(.975)">
+<span data-icon style="font-size:26px;font-variation-settings:'FILL' 1">dialpad</span>
+<span style="flex:1;text-align:left">
+<span style="display:block;font-size:16.5px;font-weight:700;letter-spacing:-.2px">Aller à un numéro</span>
+<span style="display:block;font-size:12.5px;opacity:.8;margin-top:1px">Le plus rapide pendant le culte</span>
+</span>
+<span data-icon style="font-size:22px;opacity:.75">chevron_right</span>
+</button>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 20px 0">
+<button onClick="{{ goListe }}" style="text-align:left;border:1px solid var(--outline);border-radius:22px;background:var(--surf);padding:16px 14px 14px;cursor:pointer;color:var(--on);transition:transform .12s,box-shadow .16s" style-active="transform:scale(.97)" style-hover="box-shadow:var(--shadow)">
+<span data-icon style="font-size:26px;color:var(--pri);font-variation-settings:'FILL' 1">menu_book</span>
+<span style="display:block;font-size:15.5px;font-weight:600;margin-top:12px">Cantiques</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:2px">Tout le recueil</span>
+</button>
+<button onClick="{{ goFavoris }}" style="text-align:left;border:1px solid var(--outline);border-radius:22px;background:var(--surf);padding:16px 14px 14px;cursor:pointer;color:var(--on);transition:transform .12s,box-shadow .16s;position:relative" style-active="transform:scale(.97)" style-hover="box-shadow:var(--shadow)">
+<span data-icon style="font-size:26px;color:var(--pri);font-variation-settings:'FILL' 1">favorite</span>
+<span style="display:block;font-size:15.5px;font-weight:600;margin-top:12px">Favoris</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:2px">{{ favLabel }}</span>
+</button>
+<button onClick="{{ goRecherche }}" style="text-align:left;border:1px solid var(--outline);border-radius:22px;background:var(--surf);padding:16px 14px 14px;cursor:pointer;color:var(--on);transition:transform .12s,box-shadow .16s" style-active="transform:scale(.97)" style-hover="box-shadow:var(--shadow)">
+<span data-icon style="font-size:26px;color:var(--pri)">search</span>
+<span style="display:block;font-size:15.5px;font-weight:600;margin-top:12px">Recherche</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:2px">Titre ou paroles</span>
+</button>
+<button onClick="{{ goParams }}" style="text-align:left;border:1px solid var(--outline);border-radius:22px;background:var(--surf);padding:16px 14px 14px;cursor:pointer;color:var(--on);transition:transform .12s,box-shadow .16s" style-active="transform:scale(.97)" style-hover="box-shadow:var(--shadow)">
+<span data-icon style="font-size:26px;color:var(--pri)">settings</span>
+<span style="display:block;font-size:15.5px;font-weight:600;margin-top:12px">Paramètres</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:2px">Thème, texte</span>
+</button>
+</div>
+
+<button onClick="{{ goApropos }}" style="margin:12px 20px 0;width:calc(100% - 40px);display:flex;align-items:center;gap:12px;border:1px solid var(--outline);border-radius:18px;background:var(--surf);padding:13px 14px;cursor:pointer;color:var(--on);transition:transform .12s" style-active="transform:scale(.985)">
+<span data-icon style="font-size:22px;color:var(--on2)">info</span>
+<span style="flex:1;text-align:left;font-size:14.5px;font-weight:500">À propos du recueil</span>
+<span data-icon style="font-size:20px;color:var(--on3)">chevron_right</span>
+</button>
+
+<div style="margin:18px 20px 26px;padding:18px 18px 16px;border-radius:22px;background:var(--goldSoft);border:1px solid var(--goldBord)">
+<span data-icon style="font-size:22px;color:var(--gold);font-variation-settings:'FILL' 1">format_quote</span>
+<div style="font-family:Literata,serif;font-size:15.5px;line-height:1.6;color:var(--on);margin-top:6px">Chantez à l’Éternel un cantique nouveau, car il a fait des merveilles.</div>
+<div style="font-size:12px;font-weight:600;letter-spacing:.4px;color:var(--onGold);margin-top:10px">PSAUME 98.1</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isListe }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Liste des cantiques" style="flex:1;min-height:0;display:flex;flex-direction:column;animation:rdcIn .3s cubic-bezier(.2,.85,.25,1)">
+<div style="flex:none;padding:0 12px 10px;background:var(--bg)">
+<div style="height:52px;display:flex;align-items:center;gap:4px">
+<button onClick="{{ goAccueil }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:24px">arrow_back</span>
+</button>
+<div style="flex:1;min-width:0;padding-left:4px">
+<div style="font-size:18px;font-weight:600;letter-spacing:-.2px">{{ listeTitre }}</div>
+<div style="font-size:12px;color:var(--on3);margin-top:1px">{{ listeCompte }}</div>
+</div>
+<button onClick="{{ openDlg }}" style="height:40px;padding:0 14px;border:1px solid var(--priBord);border-radius:20px;background:var(--priSoft);color:var(--onPriC);display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;cursor:pointer" style-active="transform:scale(.96)">
+<span data-icon style="font-size:19px">dialpad</span>N°
+</button>
+</div>
+<div onClick="{{ goRecherche }}" style="display:flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:24px;background:var(--surf2);color:var(--on3);cursor:pointer;margin-top:2px">
+<span data-icon style="font-size:21px">search</span>
+<span style="font-size:14.5px">Numéro, titre ou paroles…</span>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px;padding-left:2px">
+<button onClick="{{ setSecCantiques }}" style="height:34px;padding:0 14px;border-radius:17px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--outline);background:{{ segCantiquesBg }};color:{{ segCantiquesFg }};transition:background .18s">Cantiques</button>
+<button onClick="{{ setSecChoeurs }}" style="height:34px;padding:0 14px;border-radius:17px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--outline);background:{{ segChoeursBg }};color:{{ segChoeursFg }};transition:background .18s">Chœurs</button>
+<button onClick="{{ toggleFavOnly }}" style="height:34px;padding:0 13px 0 10px;border-radius:17px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;border:1px solid var(--outline);background:{{ favChipBg }};color:{{ favChipFg }};transition:background .18s">
+<span data-icon style="font-size:17px;font-variation-settings:'FILL' 1">favorite</span>Favoris
+</button>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;position:relative;display:flex">
+<div data-scroll ref="{{ listRef }}" style="flex:1;min-width:0;overflow-y:auto;padding:2px 0 20px">
+<sc-for list="{{ items }}" as="it" hint-placeholder-count="9">
+<button onClick="{{ it.open }}" data-n="{{ it.n }}" style="width:100%;display:flex;align-items:center;gap:14px;padding:9px 16px 9px 14px;background:transparent;border:none;border-bottom:1px solid var(--outline);cursor:pointer;color:var(--on);text-align:left;transition:background .14s" style-active="background:var(--surf2)" style-hover="background:var(--surf2)">
+<span style="flex:none;width:46px;height:46px;border-radius:15px;background:var(--priSoft);border:1px solid var(--priBord);color:var(--onPriC);display:flex;align-items:center;justify-content:center;font-family:Literata,serif;font-size:17px;font-weight:600">{{ it.n }}</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:15.5px;font-weight:500;line-height:1.3;letter-spacing:-.1px">{{ it.title }}</span>
+<span style="display:block;font-size:12px;color:var(--on3);margin-top:3px">{{ it.meta }}</span>
+</span>
+<span data-icon style="flex:none;font-size:20px;color:var(--pri);font-variation-settings:'FILL' 1;width:20px">{{ it.heart }}</span>
+</button>
+</sc-for>
+<sc-if value="{{ listeVide }}" hint-placeholder-val="{{ false }}">
+<div style="padding:56px 34px;text-align:center">
+<span data-icon style="font-size:44px;color:var(--surf3)">heart_broken</span>
+<div style="font-size:16px;font-weight:600;margin-top:14px">Aucun favori pour l’instant</div>
+<div style="font-size:13.5px;color:var(--on3);line-height:1.55;margin-top:6px">Touchez le cœur en haut d’un cantique pour le retrouver ici.</div>
+</div>
+</sc-if>
+</div>
+<div style="flex:none;width:32px;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:2px;padding:14px 0;background:var(--bg);border-left:1px solid var(--outline)">
+<sc-for list="{{ rail }}" as="r" hint-placeholder-count="7">
+<button onClick="{{ r.jump }}" style="width:26px;height:24px;border:none;background:transparent;color:var(--on3);font-size:10.5px;font-weight:700;letter-spacing:.2px;cursor:pointer;border-radius:8px" style-hover="background:var(--surf2);color:var(--pri)">{{ r.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLecture }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Lecture d'un cantique" style="flex:1;min-height:0;display:flex;flex-direction:column;animation:rdcFade .22s ease">
+<div style="flex:none;display:flex;align-items:center;gap:2px;padding:0 8px;height:52px;border-bottom:1px solid var(--outline);background:var(--bg)">
+<button onClick="{{ back }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:24px">arrow_back</span>
+</button>
+<div style="flex:1;min-width:0;padding-left:2px;font-size:14px;font-weight:600;color:var(--on2);letter-spacing:.2px">{{ lectureKicker }}</div>
+<button onClick="{{ toggleFav }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:24px;color:{{ favColor }};font-variation-settings:'FILL' {{ favFill }};transition:transform .2s" style-active="transform:scale(1.25)">favorite</span>
+</button>
+<button onClick="{{ share }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:22px">share</span>
+</button>
+<button onClick="{{ cycleSize }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:22px">format_size</span>
+</button>
+</div>
+
+<div data-scroll ref="{{ readRef }}" style="flex:1;min-height:0;overflow-y:auto;padding:0 0 24px">
+<div style="padding:24px 24px 4px">
+<div style="font-family:Literata,serif;font-size:var(--htitle);font-weight:600;line-height:1.22;letter-spacing:-.5px">{{ titre }}</div>
+</div>
+
+<sc-if value="{{ hasAudio }}" hint-placeholder-val="{{ false }}">
+<div style="margin:20px 20px 4px;padding:14px 16px 16px;border-radius:22px;background:var(--surf);border:1px solid var(--outline);box-shadow:var(--shadow);animation:rdcIn .3s ease">
+<div style="display:flex;align-items:center;gap:9px">
+<span data-icon style="font-size:19px;color:var(--pri)">graphic_eq</span>
+<div style="flex:1;min-width:0;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Enregistrement audio</div>
+<div style="flex:none;font-size:11.5px;color:var(--on3)">{{ audioMeta }}</div>
+</div>
+<div onClick="{{ seek }}" style="margin-top:10px;height:22px;display:flex;align-items:center;cursor:pointer">
+<div style="width:100%;height:6px;border-radius:3px;background:var(--surf3);position:relative">
+<div style="position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--pri);width:{{ audioPct }}"></div>
+<div style="position:absolute;top:50%;left:{{ audioPct }};width:14px;height:14px;border-radius:7px;background:var(--pri);transform:translate(-50%,-50%);box-shadow:0 1px 4px rgba(0,0,0,.25)"></div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--on3);font-variant-numeric:tabular-nums;margin-top:-2px">
+<span>{{ audioPos }}</span><span>{{ audioDur }}</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:12px">
+<button onClick="{{ back10 }}" style="width:46px;height:46px;flex:none;border:none;border-radius:23px;background:var(--surf2);color:var(--on2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .12s" style-active="transform:scale(.9)">
+<span data-icon style="font-size:23px">replay_10</span>
+</button>
+<button onClick="{{ togglePlay }}" style="width:60px;height:60px;flex:none;border:none;border-radius:30px;background:var(--pri);color:var(--onPri);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow);transition:transform .14s" style-active="transform:scale(.92)">
+<span data-icon style="font-size:32px;font-variation-settings:'FILL' 1">{{ playIcon }}</span>
+</button>
+<button onClick="{{ fwd10 }}" style="width:46px;height:46px;flex:none;border:none;border-radius:23px;background:var(--surf2);color:var(--on2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .12s" style-active="transform:scale(.9)">
+<span data-icon style="font-size:23px">forward_10</span>
+</button>
+</div>
+</div>
+</sc-if>
+
+<div style="padding:14px 24px 0;display:flex;flex-direction:column;gap:26px">
+<sc-for list="{{ parts }}" as="p" hint-placeholder-count="4">
+<sc-if value="{{ p.isVerse }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:14px">
+<div style="flex:none;width:24px;font-family:Literata,serif;font-size:16px;font-weight:600;color:var(--pri);padding-top:2px">{{ p.n }}</div>
+<div style="flex:1;min-width:0;font-family:Literata,serif;font-size:var(--lyric);line-height:var(--lyricLh);white-space:pre-line;text-wrap:pretty">{{ p.text }}</div>
+</div>
+</sc-if>
+<sc-if value="{{ p.isRefrain }}" hint-placeholder-val="{{ false }}">
+<div style="padding:16px 18px 18px;border-radius:20px;background:var(--priSoft);border:1px solid var(--priBord);border-left:4px solid var(--pri)">
+<div style="display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:1.4px;color:var(--onPriC);margin-bottom:8px">
+<span data-icon style="font-size:15px">repeat</span>REFRAIN
+</div>
+<div style="font-family:Literata,serif;font-style:italic;font-size:var(--lyric);line-height:var(--lyricLh);color:var(--on);white-space:pre-line;text-wrap:pretty">{{ p.text }}</div>
+</div>
+</sc-if>
+</sc-for>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;padding:30px 24px 0;color:var(--on3)">
+<div style="flex:1;height:1px;background:var(--outline)"></div>
+<span data-icon style="font-size:16px">local_florist</span>
+<div style="flex:1;height:1px;background:var(--outline)"></div>
+</div>
+<div style="text-align:center;font-size:12px;color:var(--on3);padding-top:10px">{{ lecturePied }}</div>
+</div>
+
+<div style="flex:none;display:flex;align-items:center;gap:8px;padding:8px 12px 10px;border-top:1px solid var(--outline);background:var(--surf)">
+<button onClick="{{ prev }}" style="flex:1;height:48px;border:1px solid var(--outline);border-radius:24px;background:var(--surf);color:var(--on);display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.96);background:var(--surf2)">
+<span data-icon style="font-size:20px">arrow_back</span>{{ prevLabel }}
+</button>
+<button onClick="{{ openDlg }}" style="width:56px;height:48px;flex:none;border:none;border-radius:24px;background:var(--pri);color:var(--onPri);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .12s" style-active="transform:scale(.93)">
+<span data-icon style="font-size:24px;font-variation-settings:'FILL' 1">dialpad</span>
+</button>
+<button onClick="{{ next }}" style="flex:1;height:48px;border:1px solid var(--outline);border-radius:24px;background:var(--surf);color:var(--on);display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.96);background:var(--surf2)">
+{{ nextLabel }}<span data-icon style="font-size:20px">arrow_forward</span>
+</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRecherche }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Recherche" style="flex:1;min-height:0;display:flex;flex-direction:column;animation:rdcIn .28s cubic-bezier(.2,.85,.25,1)">
+<div style="flex:none;display:flex;align-items:center;gap:8px;padding:6px 12px 12px">
+<button onClick="{{ back }}" style="width:44px;height:44px;flex:none;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:24px">arrow_back</span>
+</button>
+<div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:50px;padding:0 8px 0 16px;border-radius:25px;background:var(--surf2)">
+<span data-icon style="font-size:21px;color:var(--on2)">search</span>
+<input value="{{ q }}" onChange="{{ onQuery }}" placeholder="Numéro, titre, paroles…" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:15px;color:var(--on);padding:0">
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ clearQuery }}" style="width:34px;height:34px;flex:none;border:none;border-radius:17px;background:var(--surf3);color:var(--on2);display:flex;align-items:center;justify-content:center;cursor:pointer">
+<span data-icon style="font-size:18px">close</span>
+</button>
+</sc-if>
+</div>
+</div>
+
+<sc-if value="{{ searchIdle }}" hint-placeholder-val="{{ true }}">
+<div data-scroll style="flex:1;min-height:0;overflow-y:auto;padding:4px 20px 24px">
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--on3);margin:6px 0 12px">RECHERCHES RÉCENTES</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ recents }}" as="r" hint-placeholder-count="4">
+<button onClick="{{ r.use }}" style="height:36px;padding:0 14px;border:1px solid var(--outline);border-radius:18px;background:var(--surf);color:var(--on);font-size:13.5px;font-weight:500;cursor:pointer" style-active="background:var(--surf2)">{{ r.label }}</button>
+</sc-for>
+</div>
+<div style="margin-top:26px;padding:18px;border-radius:20px;background:var(--surf);border:1px solid var(--outline)">
+<div style="font-size:14px;font-weight:600">Trois façons de chercher</div>
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="flex:none;width:34px;height:34px;border-radius:11px;background:var(--priSoft);color:var(--onPriC);display:flex;align-items:center;justify-content:center;font-family:Literata,serif;font-size:14px;font-weight:600">87</span>
+<span style="font-size:13.5px;color:var(--on2)">Le numéro du cantique</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+<span style="flex:none;width:34px;height:34px;border-radius:11px;background:var(--priSoft);color:var(--onPriC);display:flex;align-items:center;justify-content:center"><span data-icon style="font-size:19px">title</span></span>
+<span style="font-size:13.5px;color:var(--on2)">Un mot du titre</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+<span style="flex:none;width:34px;height:34px;border-radius:11px;background:var(--priSoft);color:var(--onPriC);display:flex;align-items:center;justify-content:center"><span data-icon style="font-size:19px">format_quote</span></span>
+<span style="font-size:13.5px;color:var(--on2)">Une phrase des paroles</span>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ searchHasResults }}" hint-placeholder-val="{{ false }}">
+<div data-scroll style="flex:1;min-height:0;overflow-y:auto;padding:0 0 24px">
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--on3);padding:4px 20px 10px">{{ resultsLabel }}</div>
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="5">
+<button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:flex-start;gap:14px;padding:12px 16px;background:transparent;border:none;border-bottom:1px solid var(--outline);cursor:pointer;color:var(--on);text-align:left" style-active="background:var(--surf2)" style-hover="background:var(--surf2)">
+<span style="flex:none;width:44px;height:44px;border-radius:14px;background:var(--priSoft);border:1px solid var(--priBord);color:var(--onPriC);display:flex;align-items:center;justify-content:center;font-family:Literata,serif;font-size:16px;font-weight:600">{{ r.n }}</span>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-size:15px;font-weight:500;line-height:1.3">{{ r.title }}</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:3px;line-height:1.4">{{ r.kind }}</span>
+<sc-if value="{{ r.hasSnip }}" hint-placeholder-val="{{ false }}">
+<span style="display:block;font-family:Literata,serif;font-size:13px;color:var(--on2);margin-top:5px;line-height:1.45">{{ r.before }}<mark style="background:var(--priC);color:var(--onPriC);border-radius:3px;padding:0 2px">{{ r.match }}</mark>{{ r.after }}</span>
+</sc-if>
+</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ searchEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 40px 60px;text-align:center;animation:rdcFade .3s ease">
+<span data-icon style="font-size:46px;color:var(--surf3)">search_off</span>
+<div style="font-size:16.5px;font-weight:600;margin-top:16px">Aucun résultat</div>
+<div style="font-size:13.5px;color:var(--on3);line-height:1.55;margin-top:6px">Rien ne correspond à « {{ q }} ». Essayez un numéro ou un autre mot.</div>
+<button onClick="{{ clearQuery }}" style="margin-top:20px;height:44px;padding:0 20px;border:none;border-radius:22px;background:var(--priC);color:var(--onPriC);font-size:14px;font-weight:600;cursor:pointer" style-active="transform:scale(.96)">Effacer la recherche</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isParams }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Paramètres" data-scroll style="flex:1;min-height:0;overflow-y:auto;animation:rdcIn .3s cubic-bezier(.2,.85,.25,1)">
+<div style="display:flex;align-items:center;gap:4px;padding:0 8px;height:52px">
+<button onClick="{{ back }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:24px">arrow_back</span>
+</button>
+<div style="font-size:19px;font-weight:600;padding-left:4px">Paramètres</div>
+</div>
+
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--pri);padding:12px 24px 8px">APPARENCE</div>
+<div style="margin:0 20px;border-radius:22px;background:var(--surf);border:1px solid var(--outline);overflow:hidden">
+<div style="padding:16px 18px 18px">
+<div style="font-size:14.5px;font-weight:600">Couleur du thème</div>
+<div style="font-size:12.5px;color:var(--on3);margin-top:2px">Appliqué immédiatement</div>
+<div style="display:flex;gap:10px;margin-top:16px">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="6">
+<button onClick="{{ t.pick }}" title="{{ t.label }}" style="flex:1;aspect-ratio:1;border-radius:50%;cursor:pointer;background:{{ t.swatch }};border:2px solid {{ t.ring }};box-shadow:{{ t.glow }};display:flex;align-items:center;justify-content:center;color:#fff;transition:transform .16s" style-active="transform:scale(.9)">
+<span data-icon style="font-size:19px;opacity:{{ t.checked }}">check</span>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:10px;margin-top:8px">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="6">
+<div style="flex:1;text-align:center;font-size:9.5px;font-weight:600;color:{{ t.labelColor }};letter-spacing:-.1px">{{ t.label }}</div>
+</sc-for>
+</div>
+</div>
+<div style="height:1px;background:var(--outline)"></div>
+<button onClick="{{ toggleDark }}" style="width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;background:transparent;border:none;cursor:pointer;color:var(--on);text-align:left" style-active="background:var(--surf2)">
+<span data-icon style="font-size:23px;color:var(--on2)">dark_mode</span>
+<span style="flex:1">
+<span style="display:block;font-size:14.5px;font-weight:600">Mode sombre</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:2px">{{ darkLabel }}</span>
+</span>
+<span style="flex:none;width:52px;height:32px;border-radius:16px;background:{{ switchTrack }};border:2px solid {{ switchBorder }};position:relative;transition:background .22s,border-color .22s">
+<span style="position:absolute;top:50%;left:{{ switchX }};width:{{ switchSize }};height:{{ switchSize }};border-radius:50%;background:{{ switchThumb }};transform:translate(-50%,-50%);transition:left .22s cubic-bezier(.2,.9,.2,1),width .22s,height .22s"></span>
+</span>
+</button>
+</div>
+
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--pri);padding:22px 24px 8px">LECTURE</div>
+<div style="margin:0 20px;border-radius:22px;background:var(--surf);border:1px solid var(--outline);padding:16px 18px 18px">
+<div style="font-size:14.5px;font-weight:600">Taille du texte</div>
+<div style="display:flex;gap:6px;margin-top:14px;padding:4px;border-radius:16px;background:var(--surf2)">
+<sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
+<button onClick="{{ s.pick }}" style="flex:1;height:40px;border:none;border-radius:12px;cursor:pointer;font-weight:600;font-size:{{ s.fs }};background:{{ s.bg }};color:{{ s.fg }};box-shadow:{{ s.sh }};transition:background .18s">A</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:6px;margin-top:6px">
+<sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
+<div style="flex:1;text-align:center;font-size:10px;font-weight:600;color:{{ s.labelColor }}">{{ s.label }}</div>
+</sc-for>
+</div>
+<div style="margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--priSoft);border:1px solid var(--priBord)">
+<div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:var(--onPriC);margin-bottom:6px">APERÇU</div>
+<div style="font-family:Literata,serif;font-size:var(--lyric);line-height:var(--lyricLh);color:var(--on)">Chantez, chantez au Seigneur un cantique nouveau.</div>
+</div>
+</div>
+
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--pri);padding:22px 24px 8px">MES DONNÉES</div>
+<div style="margin:0 20px;border-radius:22px;background:var(--surf);border:1px solid var(--outline);overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:15px 18px">
+<span data-icon style="font-size:23px;color:var(--pri);font-variation-settings:'FILL' 1">favorite</span>
+<span style="flex:1;font-size:14.5px;font-weight:500">Favoris enregistrés</span>
+<span style="font-size:14.5px;font-weight:700;color:var(--pri)">{{ favCount }}</span>
+</div>
+<div style="height:1px;background:var(--outline)"></div>
+<div style="display:flex;align-items:flex-start;gap:14px;padding:15px 18px">
+<span data-icon style="font-size:23px;color:var(--on2)">phonelink_lock</span>
+<span style="flex:1">
+<span style="display:block;font-size:14.5px;font-weight:500">Stockage local</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);line-height:1.5;margin-top:3px">Cantiques, favoris et préférences restent sur votre téléphone. Aucune connexion requise.</span>
+</span>
+</div>
+</div>
+
+<button onClick="{{ goApropos }}" style="margin:22px 20px 30px;width:calc(100% - 40px);display:flex;align-items:center;gap:14px;border:1px solid var(--outline);border-radius:18px;background:var(--surf);padding:15px 18px;cursor:pointer;color:var(--on)" style-active="background:var(--surf2)">
+<span data-icon style="font-size:23px;color:var(--on2)">info</span>
+<span style="flex:1;text-align:left;font-size:14.5px;font-weight:500">À propos</span>
+<span style="font-size:12.5px;color:var(--on3)">Version 1.0.0</span>
+<span data-icon style="font-size:20px;color:var(--on3)">chevron_right</span>
+</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApropos }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="À propos" data-scroll style="flex:1;min-height:0;overflow-y:auto;animation:rdcIn .3s cubic-bezier(.2,.85,.25,1)">
+<div style="display:flex;align-items:center;gap:4px;padding:0 8px;height:52px">
+<button onClick="{{ back }}" style="width:44px;height:44px;border:none;border-radius:22px;background:transparent;color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background:var(--surf2)">
+<span data-icon style="font-size:24px">arrow_back</span>
+</button>
+<div style="font-size:19px;font-weight:600;padding-left:4px">À propos</div>
+</div>
+
+<div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px 30px 4px">
+<img src="logo.png" alt="Logo du recueil" style="width:82px;height:82px;border-radius:24px;box-shadow:var(--shadow)">
+<div style="font-family:Literata,serif;font-size:23px;font-weight:600;margin-top:16px;letter-spacing:-.4px">Recueil de Cantiques</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+<span style="padding:5px 11px;border-radius:100px;background:var(--priC);color:var(--onPriC);font-size:11.5px;font-weight:700;letter-spacing:.2px">1<sup>re</sup> ÉDITION</span>
+<span style="padding:5px 11px;border-radius:100px;background:var(--surf2);color:var(--on2);font-size:11.5px;font-weight:600">Version 1.0.0</span>
+</div>
+</div>
+
+<div style="margin:22px 20px 0;padding:18px;border-radius:22px;background:var(--surf);border:1px solid var(--outline)">
+<div style="font-family:Literata,serif;font-size:15px;line-height:1.62;color:var(--on2);text-wrap:pretty">Ce recueil rassemble <strong style="color:var(--on)">130 cantiques</strong> et <strong style="color:var(--on)">74 chœurs</strong> pour la louange, l’adoration et l’édification de l’Église. Cette première édition est destinée aux cultes, aux réunions de prière et à la méditation personnelle — entièrement hors ligne.</div>
+</div>
+
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--pri);padding:24px 24px 8px">AUTEURS</div>
+<div style="margin:0 20px;border-radius:22px;background:var(--surf);border:1px solid var(--outline);overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:15px 18px">
+<span style="flex:none;width:40px;height:40px;border-radius:20px;background:var(--priC);color:var(--onPriC);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">TC</span>
+<span style="flex:1">
+<span style="display:block;font-size:14.5px;font-weight:600">TCHINDEBBE Charles</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:1px">Auteur du recueil</span>
+</span>
+</div>
+<div style="height:1px;background:var(--outline)"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:15px 18px">
+<span style="flex:none;width:40px;height:40px;border-radius:20px;background:var(--priC);color:var(--onPriC);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">GM</span>
+<span style="flex:1">
+<span style="display:block;font-size:14.5px;font-weight:600">GM DIGITAL</span>
+<span style="display:block;font-size:12.5px;color:var(--on3);margin-top:1px">Conception et développement</span>
+</span>
+</div>
+</div>
+
+<div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--pri);padding:24px 24px 8px">INFORMATIONS</div>
+<div style="margin:0 20px;border-radius:22px;background:var(--surf);border:1px solid var(--outline);overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:14px 18px">
+<span data-icon style="font-size:22px;color:var(--on2)">library_books</span>
+<span style="flex:1;font-size:14px;font-weight:500">Contenu</span>
+<span style="font-size:13.5px;color:var(--on2)">130 cantiques · 74 chœurs</span>
+</div>
+<div style="height:1px;background:var(--outline)"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:14px 18px">
+<span data-icon style="font-size:22px;color:var(--on2)">calendar_month</span>
+<span style="flex:1;font-size:14px;font-weight:500">Édition</span>
+<span style="font-size:13.5px;color:var(--on2)">Première édition</span>
+</div>
+<div style="height:1px;background:var(--outline)"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:14px 18px">
+<span data-icon style="font-size:22px;color:var(--on2)">mail</span>
+<span style="flex:1;font-size:14px;font-weight:500">Contact</span>
+<span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--on3);background:var(--surf2);padding:4px 8px;border-radius:6px">e-mail à définir</span>
+</div>
+<div style="height:1px;background:var(--outline)"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:14px 18px">
+<span data-icon style="font-size:22px;color:var(--on2)">cloud_off</span>
+<span style="flex:1;font-size:14px;font-weight:500">Fonctionnement</span>
+<span style="font-size:13.5px;color:var(--on2)">100 % hors ligne</span>
+</div>
+</div>
+
+<div style="text-align:center;padding:26px 34px 32px;font-size:12px;color:var(--on3);line-height:1.6">© 2026 TCHINDEBBE Charles &amp; GM DIGITAL<br>Tous droits réservés.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSplash }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Splash" style="position:absolute;inset:0;z-index:20;background:var(--surf);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:rdcFade .3s ease">
+<div style="position:absolute;top:-60px;right:-70px;width:230px;height:230px;border-radius:50%;background:var(--priSoft)"></div>
+<div style="position:absolute;bottom:-40px;left:-60px;width:180px;height:180px;border-radius:50%;background:var(--goldSoft)"></div>
+<img src="logo.png" alt="" style="width:112px;height:112px;border-radius:32px;box-shadow:0 18px 44px -12px rgba(16,24,40,.4);animation:rdcBreathe 3.4s ease-in-out infinite;position:relative">
+<div style="font-family:Literata,serif;font-size:25px;font-weight:600;letter-spacing:-.5px;margin-top:26px;color:var(--on);position:relative">Recueil de Cantiques</div>
+<div style="font-size:13px;color:var(--on3);margin-top:8px;letter-spacing:.3px;position:relative">1<sup>re</sup> édition · 130 cantiques</div>
+<div style="width:34px;height:34px;border-radius:50%;border:3px solid var(--priC);border-top-color:var(--pri);animation:rdcSpin .85s linear infinite;margin-top:44px;position:relative"></div>
+<div style="position:absolute;bottom:34px;left:0;right:0;text-align:center;font-size:11.5px;color:var(--on3);letter-spacing:.3px">TCHINDEBBE Charles &amp; GM DIGITAL</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ dlgOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeDlg }}" style="position:absolute;inset:0;z-index:30;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:22px;animation:rdcFade .18s ease">
+<div onClick="{{ stop }}" style="width:100%;border-radius:30px;background:var(--surf);padding:22px 20px 20px;box-shadow:0 24px 60px -12px rgba(8,12,20,.5);animation:rdcPop .26s cubic-bezier(.2,.9,.25,1)">
+<div style="display:flex;align-items:center;gap:10px">
+<span data-icon style="font-size:24px;color:var(--pri);font-variation-settings:'FILL' 1">dialpad</span>
+<div style="flex:1;font-size:17.5px;font-weight:700;letter-spacing:-.2px">Aller à un numéro</div>
+<button onClick="{{ closeDlg }}" style="width:36px;height:36px;border:none;border-radius:18px;background:var(--surf2);color:var(--on2);display:flex;align-items:center;justify-content:center;cursor:pointer">
+<span data-icon style="font-size:19px">close</span>
+</button>
+</div>
+
+<div style="display:flex;gap:6px;margin-top:16px;padding:4px;border-radius:15px;background:var(--surf2)">
+<button onClick="{{ dlgSecCantiques }}" style="flex:1;height:38px;border:none;border-radius:11px;cursor:pointer;font-size:13px;font-weight:600;background:{{ dlgSegCBg }};color:{{ dlgSegCFg }};box-shadow:{{ dlgSegCSh }};transition:background .16s">Cantique</button>
+<button onClick="{{ dlgSecChoeurs }}" style="flex:1;height:38px;border:none;border-radius:11px;cursor:pointer;font-size:13px;font-weight:600;background:{{ dlgSegHBg }};color:{{ dlgSegHFg }};box-shadow:{{ dlgSegHSh }};transition:background .16s">Chœur</button>
+</div>
+
+<div style="margin-top:16px;padding:16px 18px;border-radius:20px;background:var(--priSoft);border:1px solid var(--priBord);min-height:104px;display:flex;flex-direction:column;justify-content:center">
+<div style="font-family:Literata,serif;font-size:42px;font-weight:600;line-height:1;color:var(--pri);letter-spacing:-1px;min-height:42px">{{ dlgDisplay }}</div>
+<div style="font-size:13px;font-weight:500;color:{{ dlgHintColor }};margin-top:10px;line-height:1.35;min-height:18px">{{ dlgHint }}</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px">
+<sc-for list="{{ keys }}" as="k" hint-placeholder-count="12">
+<button onClick="{{ k.press }}" style="height:56px;border:1px solid var(--outline);border-radius:18px;background:{{ k.bg }};color:{{ k.fg }};font-family:Literata,serif;font-size:23px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .1s,background .16s" style-active="transform:scale(.94);background:var(--surf3)">
+<span data-icon style="font-size:{{ k.iconSize }};font-family:{{ k.iconFont }}">{{ k.label }}</span>
+</button>
+</sc-for>
+</div>
+
+<button onClick="{{ dlgGo }}" disabled="{{ dlgDisabled }}" style="width:100%;height:56px;margin-top:12px;border:none;border-radius:20px;background:{{ dlgGoBg }};color:{{ dlgGoFg }};font-size:16px;font-weight:700;cursor:{{ dlgGoCursor }};display:flex;align-items:center;justify-content:center;gap:8px;transition:background .18s,transform .12s" style-active="transform:scale(.98)">
+Ouvrir<span data-icon style="font-size:22px">arrow_forward</span>
+</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:16px;right:16px;bottom:34px;z-index:40;display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:16px;background:var(--on);color:var(--bg);box-shadow:0 12px 30px -8px rgba(8,12,20,.5);animation:rdcRise .26s cubic-bezier(.2,.9,.25,1)">
+<span data-icon style="font-size:20px;font-variation-settings:'FILL' 1">{{ toastIcon }}</span>
+<span style="flex:1;font-size:14px;font-weight:500">{{ toastMsg }}</span>
+</div>
+</sc-if>
+
+<div style="flex:none;height:22px;display:flex;align-items:center;justify-content:center">
+<div style="width:104px;height:4px;border-radius:2px;background:var(--on);opacity:.32"></div>
+</div>
+
+</div>
+</div>
+
+<div style="width:212px;flex:none;position:sticky;top:32px;display:flex;flex-direction:column;gap:14px">
+<div style="background:#fff;border:1px solid #dcE1e9;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(20,28,42,.06)">
+<div style="font-size:10px;font-weight:700;letter-spacing:1.3px;color:#8b93a1">MAQUETTE — ÉCRANS</div>
+<div style="display:flex;flex-direction:column;gap:4px;margin-top:10px">
+<sc-for list="{{ nav }}" as="s" hint-placeholder-count="8">
+<button onClick="{{ s.go }}" style="display:flex;align-items:center;gap:9px;height:34px;padding:0 10px;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:{{ s.weight }};background:{{ s.bg }};color:{{ s.fg }};text-align:left;transition:background .14s" style-hover="background:#f1f4f9">
+<span data-icon style="font-size:17px">{{ s.icon }}</span>{{ s.label }}
+</button>
+</sc-for>
+</div>
+</div>
+<div style="background:#fff;border:1px solid #dcE1e9;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(20,28,42,.06)">
+<div style="font-size:10px;font-weight:700;letter-spacing:1.3px;color:#8b93a1">THÈME &amp; MODE</div>
+<div style="display:flex;gap:6px;margin-top:10px">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="6">
+<button onClick="{{ t.pick }}" title="{{ t.label }}" style="flex:1;aspect-ratio:1;border-radius:50%;cursor:pointer;background:{{ t.swatch }};border:2px solid {{ t.railRing }};transition:transform .14s" style-active="transform:scale(.9)"></button>
+</sc-for>
+</div>
+<button onClick="{{ toggleDark }}" style="width:100%;height:34px;margin-top:10px;border:1px solid #dce1e9;border-radius:10px;background:#f7f9fc;color:#3c4453;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px">
+<span data-icon style="font-size:16px">{{ darkIcon }}</span>{{ darkBtn }}
+</button>
+</div>
+<div style="background:#fff;border:1px solid #dcE1e9;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(20,28,42,.06);font-size:11.5px;line-height:1.6;color:#5b6472">
+<div style="font-size:10px;font-weight:700;letter-spacing:1.3px;color:#8b93a1;margin-bottom:8px">NOTES</div>
+Contenu réel : 130 cantiques + 74 chœurs importés du recueil. Recherche plein texte, favoris persistants, 6 thèmes, 4 tailles de texte, mode sombre.<br><br>Le clavier « Aller à un numéro » est l’action principale : accessible depuis l’accueil, la liste et la lecture.
+</div>
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;bleu&quot;,&quot;vert&quot;,&quot;violet&quot;,&quot;orange&quot;,&quot;rouge&quot;,&quot;noir&quot;],&quot;default&quot;:&quot;bleu&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Apparence&quot;},&quot;darkMode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Apparence&quot;},&quot;textSize&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Petit&quot;,&quot;Normal&quot;,&quot;Grand&quot;,&quot;Très grand&quot;],&quot;default&quot;:&quot;Normal&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Lecture&quot;},&quot;audioEnabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenu&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;splash&quot;,&quot;accueil&quot;,&quot;liste&quot;,&quot;lecture&quot;,&quot;favoris&quot;,&quot;recherche&quot;,&quot;parametres&quot;,&quot;apropos&quot;],&quot;default&quot;:&quot;splash&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;}}">
+const THEMES = [
+  { id:'bleu', label:'Bleu', h:258, c:0.19, l:0.53 },
+  { id:'vert', label:'Vert', h:150, c:0.14, l:0.53 },
+  { id:'violet', label:'Violet', h:295, c:0.19, l:0.52 },
+  { id:'orange', label:'Orange', h:58, c:0.15, l:0.66, dk:1 },
+  { id:'rouge', label:'Rouge', h:25, c:0.19, l:0.55 },
+  { id:'noir', label:'Noir', h:265, c:0.014, l:0.26 },
+];
+const SIZES = [
+  { label:'Petit', lyric:17, lh:1.62, htitle:23 },
+  { label:'Normal', lyric:19, lh:1.66, htitle:26 },
+  { label:'Grand', lyric:22, lh:1.68, htitle:29 },
+  { label:'Très grand', lyric:26, lh:1.7, htitle:32 },
+];
+const AUDIO_IDS = [1, 3, 11, 26, 49, 72, 87, 99, 103, 122];
+const RECENTS = ['87', 'enlevés', 'grâce', 'Jésus mon roi', '12'];
+const LS = 'rdc.';
+
+const norm = s => (s || '').toString().toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[’']/g, "'").replace(/\s+/g, ' ').trim();
+const mmss = s => {
+  s = Math.max(0, Math.round(s));
+  return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+};
+const buzz = ms => { try { navigator.vibrate && navigator.vibrate(ms || 8); } catch (e) {} };
+
+function tokens(themeId, dark) {
+  const t = THEMES.find(x => x.id === themeId) || THEMES[0];
+  const h = t.h, c = t.c;
+  const ok = (l, ch) => 'oklch(' + l + ' ' + Math.max(0, ch).toFixed(3) + ' ' + h + ')';
+  const neutral = c < 0.05;
+  if (!dark) return {
+    '--pri': ok(t.l, c), '--onPri': t.dk ? ok(0.24, c * 0.5) : '#ffffff',
+    '--priC': ok(0.93, c * 0.26), '--onPriC': ok(0.37, c * 0.55),
+    '--priSoft': ok(0.968, c * 0.12), '--priBord': ok(0.875, c * 0.28),
+    '--bg': ok(0.982, c * 0.04), '--surf': '#ffffff',
+    '--surf2': ok(0.958, c * 0.055), '--surf3': ok(0.928, c * 0.08),
+    '--on': ok(0.21, c * 0.06), '--on2': ok(0.47, c * 0.05), '--on3': ok(0.63, c * 0.045),
+    '--outline': ok(0.90, c * 0.05), '--scrim': 'rgba(12,16,22,.42)',
+    '--shadow': '0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.07)',
+    '--gold': 'oklch(0.72 0.13 70)', '--goldSoft': 'oklch(0.968 0.038 82)',
+    '--goldBord': 'oklch(0.885 0.065 78)', '--onGold': 'oklch(0.42 0.09 70)',
+  };
+  return {
+    '--pri': neutral ? ok(0.93, 0.008) : ok(0.79, c * 0.62),
+    '--onPri': neutral ? ok(0.22, 0.01) : ok(0.25, c * 0.5),
+    '--priC': ok(0.37, c * 0.42), '--onPriC': neutral ? ok(0.90, 0.01) : ok(0.90, c * 0.22),
+    '--priSoft': ok(0.255, c * 0.20), '--priBord': ok(0.40, c * 0.28),
+    '--bg': ok(0.158, c * 0.03), '--surf': ok(0.205, c * 0.035),
+    '--surf2': ok(0.248, c * 0.045), '--surf3': ok(0.30, c * 0.055),
+    '--on': ok(0.955, c * 0.02), '--on2': ok(0.755, c * 0.03), '--on3': ok(0.60, c * 0.03),
+    '--outline': ok(0.325, c * 0.03), '--scrim': 'rgba(0,0,0,.6)',
+    '--shadow': '0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.35)',
+    '--gold': 'oklch(0.85 0.12 78)', '--goldSoft': 'oklch(0.27 0.05 75)',
+    '--goldBord': 'oklch(0.42 0.07 75)', '--onGold': 'oklch(0.86 0.10 80)',
+  };
+}
+
+class Component extends DCLogic {
+  state = {
+    data: null,
+    screen: this.props.startScreen || 'splash',
+    section: 'cantiques',
+    id: 1, chid: 1,
+    q: '', favOnly: false,
+    favs: [], favsCh: [],
+    theme: this.props.theme || 'bleu',
+    dark: !!this.props.darkMode,
+    ts: Math.max(0, SIZES.findIndex(s => s.label === (this.props.textSize || 'Normal'))),
+    dlg: false, dlgVal: '', dlgSec: 'cantiques',
+    playing: false, pos: 0,
+    toast: null, toastIcon: 'check_circle',
+  };
+
+  componentDidMount() {
+    import('./recueil-data.js').then(m => {
+      const index = {};
+      m.CANTIQUES.forEach(c => {
+        index[c.n] = norm(c.title + ' ' + c.parts.map(p => p.l.join(' ')).join(' '));
+      });
+      const indexCh = {};
+      m.CHOEURS.forEach(c => { indexCh[c.n] = norm(c.l.join(' ')); });
+      this.index = index; this.indexCh = indexCh;
+      this.setState({ data: { cantiques: m.CANTIQUES, choeurs: m.CHOEURS } });
+    });
+    try {
+      const g = k => { const v = localStorage.getItem(LS + k); return v == null ? null : JSON.parse(v); };
+      const p = {};
+      const f = g('favs');
+      if (Array.isArray(f)) p.favs = f;
+      else { p.favs = [3, 12, 87]; this.save('favs', p.favs); }
+      const fc = g('favsCh');
+      if (Array.isArray(fc)) p.favsCh = fc;
+      else { p.favsCh = [5]; this.save('favsCh', p.favsCh); }
+      const th = g('theme'); if (th && THEMES.some(t => t.id === th)) p.theme = th;
+      const dk = g('dark'); if (typeof dk === 'boolean') p.dark = dk;
+      const ts = g('ts'); if (typeof ts === 'number' && SIZES[ts]) p.ts = ts;
+      if (Object.keys(p).length) this.setState(p);
+    } catch (e) {}
+    if (this.state.screen === 'splash') {
+      this.splashT = setTimeout(() => this.setState({ screen: 'accueil' }), 2400);
+    }
+    this.tick = setInterval(() => {
+      if (!this.state.playing) return;
+      const dur = this.dur();
+      const pos = this.state.pos + 0.3;
+      if (pos >= dur) this.setState({ pos: dur, playing: false });
+      else this.setState({ pos });
+    }, 300);
+    this.applyVars();
+  }
+  componentDidUpdate(pp, ps) {
+    this.applyVars();
+    const prevId = ps && ps.id;
+    if (prevId !== undefined && prevId !== this.state.id && this.readRef && this.readRef.current) {
+      this.readRef.current.scrollTop = 0;
+    }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.splashT); clearInterval(this.tick); clearTimeout(this.toastT);
+  }
+
+  applyVars() {
+    const hasRoot = !!(this.rootRef && this.rootRef.current);
+    const sig = this.state.theme + '|' + this.state.dark + '|' + this.state.ts + '|' + hasRoot;
+    if (sig === this._sig) return;
+    this._sig = sig;
+    const v = tokens(this.state.theme, this.state.dark);
+    const s = SIZES[this.state.ts] || SIZES[1];
+    v['--lyric'] = s.lyric + 'px';
+    v['--lyricLh'] = String(s.lh);
+    v['--htitle'] = s.htitle + 'px';
+    const targets = [document.documentElement];
+    if (this.rootRef && this.rootRef.current) targets.push(this.rootRef.current);
+    targets.forEach(t => Object.keys(v).forEach(k => t.style.setProperty(k, v[k])));
+  }
+  save(k, val) { try { localStorage.setItem(LS + k, JSON.stringify(val)); } catch (e) {} }
+
+  cantiques() { return (this.state.data && this.state.data.cantiques) || []; }
+  choeurs() { return (this.state.data && this.state.data.choeurs) || []; }
+  isCh() { return this.state.section === 'choeurs'; }
+  current() {
+    if (this.isCh()) return this.choeurs().find(c => c.n === this.state.chid) || null;
+    return this.cantiques().find(c => c.n === this.state.id) || null;
+  }
+  hasAudio() {
+    return !this.isCh() && this.props.audioEnabled !== false && AUDIO_IDS.indexOf(this.state.id) >= 0;
+  }
+  dur() { return 132 + (this.state.id * 37) % 128; }
+  favList() { return this.isCh() ? this.state.favsCh : this.state.favs; }
+
+  toast(msg, icon) {
+    clearTimeout(this.toastT);
+    this.setState({ toast: msg, toastIcon: icon || 'check_circle' });
+    this.toastT = setTimeout(() => this.setState({ toast: null }), 2200);
+  }
+  go(screen) { buzz(); this.setState({ screen, dlg: false }); }
+  open(n, sec) {
+    buzz(12);
+    const s = sec || this.state.section;
+    this.setState(s === 'choeurs'
+      ? { chid: n, section: s, screen: 'lecture', dlg: false, playing: false, pos: 0 }
+      : { id: n, section: s, screen: 'lecture', dlg: false, playing: false, pos: 0 });
+  }
+  step(d) {
+    const list = this.isCh() ? this.choeurs() : this.cantiques();
+    if (!list.length) return;
+    const cur = this.isCh() ? this.state.chid : this.state.id;
+    const i = list.findIndex(x => x.n === cur);
+    const nx = list[(i + d + list.length) % list.length];
+    if (nx) this.open(nx.n);
+  }
+  toggleFav(n, sec) {
+    const ch = (sec || this.state.section) === 'choeurs';
+    const key = ch ? 'favsCh' : 'favs';
+    const cur = this.state[key] || [];
+    const on = cur.indexOf(n) >= 0;
+    const next = on ? cur.filter(x => x !== n) : cur.concat([n]).sort((a, b) => a - b);
+    buzz(on ? 6 : 14);
+    this.setState({ [key]: next });
+    this.save(key, next);
+    this.toast(on ? 'Retiré des favoris' : 'Ajouté aux favoris', on ? 'check_circle' : 'favorite');
+  }
+
+  renderVals() {
+    this.applyVars();
+    const st = this.state;
+    const S = SIZES[st.ts] || SIZES[1];
+    const ch = this.isCh();
+    const cur = this.current();
+    const favs = this.favList();
+    const list = ch ? this.choeurs() : this.cantiques();
+    const nbC = this.cantiques().length || 130;
+    const nbH = this.choeurs().length || 74;
+    const maxOf = arr => arr.reduce((m, c) => Math.max(m, c.n), 0);
+    const maxC = maxOf(this.cantiques()) || 130;
+    const maxH = maxOf(this.choeurs()) || 75;
+    const totalFav = st.favs.length + st.favsCh.length;
+
+    const titleOf = (c, isCh) => !c ? '' : (isCh
+      ? (((c.l && c.l[0]) || '').replace(/[.,;:!?]+$/, ''))
+      : (c.title || ''));
+    const title = c => titleOf(c, ch);
+    const onList = st.screen === 'liste' || st.screen === 'favoris';
+    const favView = st.screen === 'favoris' || st.favOnly;
+
+    const rowFor = (c, isCh) => ({
+      n: c.n,
+      title: titleOf(c, isCh),
+      meta: isCh
+        ? ('Chœur · ' + c.l.length + (c.l.length > 1 ? ' lignes' : ' ligne'))
+        : ((c.parts.filter(p => p.t === 'v' && p.n).length
+            ? c.parts.filter(p => p.t === 'v' && p.n).length + ' couplets'
+            : c.parts.reduce((a, p) => a + p.l.length, 0) + ' lignes')
+          + (c.parts.some(p => p.t === 'r') ? ' · refrain' : '')
+          + (AUDIO_IDS.indexOf(c.n) >= 0 && this.props.audioEnabled !== false ? ' · audio' : '')),
+      heart: (isCh ? st.favsCh : st.favs).indexOf(c.n) >= 0 ? 'favorite' : '',
+      open: () => this.open(c.n, isCh ? 'choeurs' : 'cantiques'),
+    });
+    const items = favView ? [] : list;
+    const rows = favView
+      ? this.cantiques().filter(c => st.favs.indexOf(c.n) >= 0).map(c => rowFor(c, false))
+          .concat(this.choeurs().filter(c => st.favsCh.indexOf(c.n) >= 0).map(c => rowFor(c, true)))
+      : list.map(c => rowFor(c, ch));
+
+    const railStops = [];
+    for (let k = 1; k <= (items.length ? items[items.length - 1].n : 1); k += 20) railStops.push(k);
+    const rail = railStops.map(k => ({
+      label: k === 1 ? '1' : String(k),
+      jump: () => {
+        const el = this.listRef && this.listRef.current;
+        if (!el) return;
+        const row = el.querySelector('[data-n="' + k + '"]');
+        if (row) el.scrollTop = row.offsetTop - 6;
+      },
+    }));
+
+    // ---- recherche
+    const qn = norm(st.q);
+    const isNumQ = /^\d+$/.test(qn);
+    let results = [];
+    if (qn.length >= 1 && st.data) {
+      const scan = (arr, kind, idx, sec) => {
+        for (const c of arr) {
+          if (results.length >= 50) return;
+          const t = titleOf(c, sec === 'choeurs');
+          const hay = idx[c.n] || '';
+          let hit = null;
+          if (isNumQ) { if (!String(c.n).startsWith(qn)) continue; }
+          else {
+            const p = hay.indexOf(qn);
+            if (p < 0) continue;
+            const raw = sec === 'choeurs' ? c.l.join(' \u00b7 ') : (c.title + ' \u00b7 ' + c.parts.map(x => x.l.join(' ')).join(' \u00b7 '));
+            const rn = norm(raw);
+            const rp = rn.indexOf(qn);
+            if (rp >= 0 && rp < raw.length) {
+              const from = Math.max(0, rp - 34);
+              hit = {
+                before: (from > 0 ? '…' : '') + raw.slice(from, rp),
+                match: raw.substr(rp, qn.length),
+                after: raw.slice(rp + qn.length, rp + qn.length + 40) + '…',
+              };
+            }
+          }
+          results.push({
+            n: c.n, title: t, kind: kind,
+            hasSnip: !!hit, before: hit ? hit.before : '', match: hit ? hit.match : '', after: hit ? hit.after : '',
+            open: () => this.open(c.n, sec),
+          });
+        }
+      };
+      scan(this.cantiques(), 'Cantique', this.index || {}, 'cantiques');
+      scan(this.choeurs(), 'Chœur', this.indexCh || {}, 'choeurs');
+    }
+
+    // ---- lecture
+    const parts = !cur ? [] : (ch
+      ? [{ isVerse: false, isRefrain: true, text: cur.l.join('\n') }]
+      : cur.parts.map(p => ({
+          isVerse: p.t === 'v', isRefrain: p.t === 'r',
+          n: p.t === 'v' ? p.n : '', text: p.l.join('\n'),
+        })));
+    const curN = ch ? st.chid : st.id;
+    const i = list.findIndex(x => x.n === curN);
+    const prevN = list.length ? list[(i - 1 + list.length) % list.length].n : 1;
+    const nextN = list.length ? list[(i + 1) % list.length].n : 1;
+    const isFav = favs.indexOf(curN) >= 0;
+    const dur = this.dur();
+
+    // ---- dialogue
+    const dlgN = parseInt(st.dlgVal, 10);
+    const dlgList = st.dlgSec === 'choeurs' ? this.choeurs() : this.cantiques();
+    const dlgHitItem = dlgList.find(c => c.n === dlgN);
+    const dlgValid = !!dlgHitItem;
+    const keys = ['1','2','3','4','5','6','7','8','9','back','0','clear'].map(k => {
+      const isAct = k === 'back' || k === 'clear';
+      return {
+        label: k === 'back' ? 'backspace' : k === 'clear' ? 'close' : k,
+        iconSize: isAct ? '22px' : 'inherit',
+        iconFont: isAct ? "'Material Symbols Rounded'" : 'inherit',
+        bg: isAct ? 'var(--surf2)' : 'var(--surf)',
+        fg: isAct ? 'var(--on2)' : 'var(--on)',
+        press: () => {
+          buzz(6);
+          if (k === 'back') this.setState(s => ({ dlgVal: s.dlgVal.slice(0, -1) }));
+          else if (k === 'clear') this.setState({ dlgVal: '' });
+          else this.setState(s => (s.dlgVal.length < 4 ? { dlgVal: (s.dlgVal + k).replace(/^0+/, '') } : null));
+        },
+      };
+    });
+
+    const seg = on => ({ bg: on ? 'var(--pri)' : 'var(--surf)', fg: on ? 'var(--onPri)' : 'var(--on2)' });
+    const segC = seg(!ch && !favView), segH = seg(ch && !favView);
+
+    const NAV = [
+      ['splash', 'Splash', 'bolt'], ['accueil', 'Accueil', 'home'],
+      ['liste', 'Liste', 'menu_book'], ['lecture', 'Lecture', 'auto_stories'],
+      ['favoris', 'Favoris', 'favorite'], ['recherche', 'Recherche', 'search'],
+      ['parametres', 'Paramètres', 'settings'], ['apropos', 'À propos', 'info'],
+    ];
+
+    return {
+      nbCantiques: nbC, nbChoeurs: nbH,
+      favLabel: totalFav ? (totalFav + (totalFav > 1 ? ' enregistrés' : ' enregistré')) : 'Aucun pour l’instant',
+      favCount: totalFav,
+
+      isSplash: st.screen === 'splash',
+      isAccueil: st.screen === 'accueil',
+      isListe: onList,
+      isLecture: st.screen === 'lecture',
+      isRecherche: st.screen === 'recherche',
+      isParams: st.screen === 'parametres',
+      isApropos: st.screen === 'apropos',
+
+      goAccueil: () => this.go('accueil'),
+      goListe: () => { buzz(); this.setState({ screen: 'liste', section: 'cantiques', favOnly: false }); },
+      goFavoris: () => { buzz(); this.setState({ screen: 'favoris', favOnly: true }); },
+      goRecherche: () => this.go('recherche'),
+      goParams: () => this.go('parametres'),
+      goApropos: () => this.go('apropos'),
+      back: () => this.go(st.screen === 'lecture' ? 'liste' : 'accueil'),
+
+      listeTitre: st.screen === 'favoris' ? 'Favoris' : (ch ? 'Chœurs' : 'Cantiques'),
+      listeCompte: rows.length + (favView ? ' favori' : (ch ? ' chœur' : ' cantique')) + (rows.length > 1 ? 's' : '')
+        + (favView && st.favsCh.length ? ' · cantiques et chœurs' : ''),
+      items: rows,
+      rail: favView ? [] : rail,
+      listeVide: rows.length === 0,
+      setSecCantiques: () => { buzz(); this.setState({ section: 'cantiques', screen: 'liste', favOnly: false }); },
+      setSecChoeurs: () => { buzz(); this.setState({ section: 'choeurs', screen: 'liste', favOnly: false }); },
+      toggleFavOnly: () => { buzz(); this.setState({ screen: favView ? 'liste' : 'favoris', favOnly: !favView }); },
+      segCantiquesBg: segC.bg, segCantiquesFg: segC.fg,
+      segChoeursBg: segH.bg, segChoeursFg: segH.fg,
+      favChipBg: favView ? 'var(--pri)' : 'var(--surf)', favChipFg: favView ? 'var(--onPri)' : 'var(--on2)',
+      listRef: (this.listRef = this.listRef || React.createRef()),
+      rootRef: (this.rootRef = this.rootRef || React.createRef()),
+
+      lectureKicker: (ch ? 'CHŒUR ' : 'CANTIQUE ') + curN,
+      titre: cur ? title(cur) : '',
+      parts,
+      lecturePied: (ch ? 'Chœur ' : 'Cantique ') + curN + ' sur ' + (ch ? maxH : maxC),
+      favColor: isFav ? 'var(--pri)' : 'var(--on2)',
+      favFill: isFav ? '1' : '0',
+      toggleFav: () => this.toggleFav(curN),
+      share: () => { buzz(); this.toast((ch ? 'Chœur ' : 'Cantique ') + curN + ' copié · prêt à partager', 'share'); },
+      cycleSize: () => {
+        const n = (st.ts + 1) % SIZES.length;
+        buzz(); this.setState({ ts: n }); this.save('ts', n);
+        this.toast('Taille du texte : ' + SIZES[n].label, 'format_size');
+      },
+      prev: () => this.step(-1), next: () => this.step(1),
+      prevLabel: 'N° ' + prevN, nextLabel: 'N° ' + nextN,
+      readRef: (this.readRef = this.readRef || React.createRef()),
+
+      hasAudio: this.hasAudio(),
+      playIcon: st.playing ? 'pause' : 'play_arrow',
+      audioMeta: 'piano et voix',
+      audioPct: Math.min(100, (st.pos / dur) * 100).toFixed(2) + '%',
+      audioPos: mmss(st.pos), audioDur: mmss(dur),
+      togglePlay: () => { buzz(10); this.setState({ playing: !st.playing }); },
+      back10: () => { buzz(6); this.setState({ pos: Math.max(0, st.pos - 10) }); },
+      fwd10: () => { buzz(6); this.setState({ pos: Math.min(dur, st.pos + 10) }); },
+      seek: e => {
+        const r = e.currentTarget.getBoundingClientRect();
+        this.setState({ pos: Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * dur });
+      },
+
+      q: st.q, hasQuery: !!st.q,
+      onQuery: e => this.setState({ q: e.target.value }),
+      clearQuery: () => this.setState({ q: '' }),
+      searchIdle: !st.q,
+      searchHasResults: !!st.q && results.length > 0,
+      searchEmpty: !!st.q && results.length === 0,
+      results,
+      resultsLabel: results.length + (results.length > 1 ? ' RÉSULTATS' : ' RÉSULTAT'),
+      recents: RECENTS.map(r => ({ label: r, use: () => this.setState({ q: r }) })),
+
+      themes: THEMES.map(t => {
+        const on = t.id === st.theme;
+        return {
+          label: t.label,
+          pick: () => { buzz(); this.setState({ theme: t.id }); this.save('theme', t.id); },
+          swatch: 'oklch(' + (t.c < 0.05 ? 0.30 : t.l + 0.04) + ' ' + t.c + ' ' + t.h + ')',
+          ring: on ? 'var(--on)' : 'transparent',
+          railRing: on ? '#2b3444' : 'transparent',
+          glow: on ? '0 0 0 3px var(--priC)' : 'none',
+          checked: on ? '1' : '0',
+          labelColor: on ? 'var(--on)' : 'var(--on3)',
+        };
+      }),
+      sizes: SIZES.map((s, k) => {
+        const on = k === st.ts;
+        return {
+          label: s.label, fs: (13 + k * 2) + 'px',
+          bg: on ? 'var(--surf)' : 'transparent',
+          fg: on ? 'var(--pri)' : 'var(--on3)',
+          sh: on ? 'var(--shadow)' : 'none',
+          labelColor: on ? 'var(--on)' : 'var(--on3)',
+          pick: () => { buzz(); this.setState({ ts: k }); this.save('ts', k); },
+        };
+      }),
+      darkLabel: st.dark ? 'Activé' : 'Désactivé',
+      toggleDark: () => { const d = !st.dark; buzz(); this.setState({ dark: d }); this.save('dark', d); },
+      switchTrack: st.dark ? 'var(--pri)' : 'var(--surf3)',
+      switchBorder: st.dark ? 'var(--pri)' : 'var(--on3)',
+      switchThumb: st.dark ? 'var(--onPri)' : 'var(--on3)',
+      switchX: st.dark ? '34px' : '15px',
+      switchSize: st.dark ? '24px' : '16px',
+      darkIcon: st.dark ? 'light_mode' : 'dark_mode',
+      darkBtn: st.dark ? 'Mode clair' : 'Mode sombre',
+
+      dlgOpen: st.dlg,
+      openDlg: () => { buzz(10); this.setState({ dlg: true, dlgVal: '', dlgSec: ch ? 'choeurs' : 'cantiques' }); },
+      closeDlg: () => this.setState({ dlg: false }),
+      stop: e => e.stopPropagation(),
+      dlgSecCantiques: () => this.setState({ dlgSec: 'cantiques' }),
+      dlgSecChoeurs: () => this.setState({ dlgSec: 'choeurs' }),
+      dlgSegCBg: st.dlgSec === 'cantiques' ? 'var(--surf)' : 'transparent',
+      dlgSegCFg: st.dlgSec === 'cantiques' ? 'var(--pri)' : 'var(--on3)',
+      dlgSegCSh: st.dlgSec === 'cantiques' ? 'var(--shadow)' : 'none',
+      dlgSegHBg: st.dlgSec === 'choeurs' ? 'var(--surf)' : 'transparent',
+      dlgSegHFg: st.dlgSec === 'choeurs' ? 'var(--pri)' : 'var(--on3)',
+      dlgSegHSh: st.dlgSec === 'choeurs' ? 'var(--shadow)' : 'none',
+      dlgDisplay: st.dlgVal || '—',
+      dlgHint: !st.dlgVal
+        ? 'Entrez un numéro de 1 à ' + (st.dlgSec === 'choeurs' ? maxH : maxC)
+        : dlgValid ? (st.dlgSec === 'choeurs' ? (dlgHitItem.l[0] || '') : dlgHitItem.title)
+        : 'Ce numéro n’existe pas dans le recueil',
+      dlgHintColor: st.dlgVal && !dlgValid ? 'oklch(0.58 0.19 25)' : 'var(--onPriC)',
+      keys,
+      dlgDisabled: !dlgValid,
+      dlgGoBg: dlgValid ? 'var(--pri)' : 'var(--surf2)',
+      dlgGoFg: dlgValid ? 'var(--onPri)' : 'var(--on3)',
+      dlgGoCursor: dlgValid ? 'pointer' : 'not-allowed',
+      dlgGo: () => { if (dlgValid) this.open(dlgN, st.dlgSec); },
+
+      hasToast: !!st.toast, toastMsg: st.toast || '', toastIcon: st.toastIcon,
+
+      nav: NAV.map(([id, label, icon]) => {
+        const on = st.screen === id || (id === 'liste' && st.screen === 'liste');
+        return {
+          label, icon, go: () => this.go(id),
+          bg: on ? '#eef3fb' : 'transparent',
+          fg: on ? '#1d4ed8' : '#4a5361',
+          weight: on ? '700' : '500',
+        };
+      }),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
