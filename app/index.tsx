@@ -77,8 +77,6 @@ export default function Accueil() {
         <StatCard
           primaryValue={TOTALS.cantiques}
           primaryLabel="cantiques"
-          secondaryValue={TOTALS.choeurs}
-          secondaryLabel="chœurs"
           pillIcon="auto_stories"
           pillLabel="Pour la louange et l’adoration"
         />

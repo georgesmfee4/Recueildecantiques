@@ -5,7 +5,7 @@ import { LECTURE } from '../../theme/tokens';
 import { AppText } from '../base/AppText';
 
 export interface VerseBlockProps {
-  /** Absent : bloc de texte continu (cantiques 30 et 38, choeurs). */
+  /** Absent : bloc de texte continu (cantiques 30 et 38). */
   n?: number;
   lines: string[];
   /**

@@ -17,15 +17,9 @@ export interface Cantique {
   parts: Part[];
 }
 
-export interface Choeur {
-  /** Numéro imprimé (1 → 75 ; le 26 est absent du recueil source). */
-  n: number;
-  l: string[];
-}
-
 export interface Recueil {
   cantiques: Cantique[];
-  choeurs: Choeur[];
 }
 
-export type Section = 'cantiques' | 'choeurs';
+/** Une seule section depuis la suppression des chœurs. */
+export type Section = 'cantiques';

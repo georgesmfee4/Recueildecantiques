@@ -17,9 +17,8 @@ import { AppText } from '../base/AppText';
 import { Icon } from '../base/Icon';
 import { IconChip } from '../base/IconChip';
 import { PRESS_SCALE, PressableScale } from '../base/PressableScale';
-import { SegmentedControl, type SegmentedOption } from '../controls/SegmentedControl';
 
-const { header, segmented, preview, keypad, submit } = DIALOG;
+const { header, preview, keypad, submit } = DIALOG;
 
 /**
  * Decoupage en rangees de trois. Une grille CSS a `1fr 1fr 1fr` ne se transpose
@@ -30,11 +29,6 @@ const { header, segmented, preview, keypad, submit } = DIALOG;
 const KEY_ROWS: Key[][] = Array.from({ length: KEYS.length / keypad.columns }, (_, r) =>
   KEYS.slice(r * keypad.columns, (r + 1) * keypad.columns)
 );
-
-const SECTION_OPTIONS: readonly SegmentedOption<Section>[] = [
-  { value: 'cantiques', label: 'Cantique' },
-  { value: 'choeurs', label: 'Chœur' },
-];
 
 export interface NumberPadDialogProps {
   visible: boolean;
@@ -53,22 +47,21 @@ export function NumberPadDialog({
   const { colors, shadow, error } = useTheme();
   const buzz = useHaptic();
 
-  const [section, setSection] = useState<Section>(initialSection);
+  const section: Section = initialSection;
   const [value, setValue] = useState('');
 
   const progress = useSharedValue(0);
 
-  // Remise a zero a chaque ouverture, et section reprise de l'appelant.
+  // Remise a zero a chaque ouverture.
   useEffect(() => {
     if (!visible) return;
-    setSection(initialSection);
     setValue('');
     progress.value = 0;
     progress.value = withTiming(1, {
       duration: MOTION.dialogIn.duration,
       easing: Easing.bezier(...EASING.dialogIn),
     });
-  }, [visible, initialSection, progress]);
+  }, [visible, progress]);
 
   // Le bouton retour Android ferme le dialogue au lieu de quitter l'ecran.
   useEffect(() => {
@@ -189,20 +182,8 @@ export function NumberPadDialog({
             </PressableScale>
           </View>
 
-          <SegmentedControl
-            options={SECTION_OPTIONS}
-            value={section}
-            onChange={setSection}
-            height={segmented.height}
-            trackRadius={segmented.trackRadius}
-            trackPadding={segmented.trackPadding}
-            itemRadius={segmented.itemRadius}
-            gap={segmented.gap}
-            fontSize={segmented.fontSize}
-            style={{ marginTop: segmented.marginTop }}
-          />
-
-          {/* Aperçu en direct */}
+          {/* Aperçu en direct. Plus de selecteur Cantique / Chœur : les chœurs
+              ont ete retires, le clavier ouvre toujours un cantique. */}
           <View
             style={{
               marginTop: preview.marginTop,

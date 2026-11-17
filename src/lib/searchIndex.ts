@@ -1,4 +1,4 @@
-import { getSection, getCantique, getChoeur } from '../data/recueil';
+import { getSection, getCantique } from '../data/recueil';
 import type { Section } from '../data/types';
 import { LINE_SEPARATOR, normalize, normalizeIndexed, type IndexedText } from './normalize';
 
@@ -13,7 +13,7 @@ export interface SearchResult {
   section: Section;
   n: number;
   title: string;
-  /** « Cantique » ou « Chœur ». */
+  /** Toujours « Cantique » (libelle affiche dans la ligne de resultat). */
   kind: string;
   /** Absent pour une recherche par numero : il n'y a rien a citer. */
   snippet?: { before: string; match: string; after: string };
@@ -31,10 +31,7 @@ interface IndexEntry {
 let index: IndexEntry[] | null = null;
 
 function buildEntry(section: Section, n: number, title: string): IndexEntry {
-  const lines =
-    section === 'choeurs'
-      ? (getChoeur(n)?.l ?? [])
-      : [title, ...(getCantique(n)?.parts.flatMap((p) => p.l) ?? [])];
+  const lines = [title, ...(getCantique(n)?.parts.flatMap((p) => p.l) ?? [])];
   const source = lines.join(LINE_SEPARATOR);
   return { section, n, title, source, indexed: normalizeIndexed(source) };
 }
@@ -45,10 +42,7 @@ function buildEntry(section: Section, n: number, title: string): IndexEntry {
  */
 export function warmSearchIndex(): void {
   if (index) return;
-  index = [
-    ...getSection('cantiques').entries.map((e) => buildEntry('cantiques', e.n, e.title)),
-    ...getSection('choeurs').entries.map((e) => buildEntry('choeurs', e.n, e.title)),
-  ];
+  index = getSection('cantiques').entries.map((e) => buildEntry('cantiques', e.n, e.title));
 }
 
 /**
@@ -76,7 +70,7 @@ function buildSnippet(entry: IndexEntry, at: number, length: number) {
  * Recherche du prototype, a l'identique :
  * une requete entierement numerique liste les numeros qui *commencent par* la
  * saisie ; sinon on cherche une sous-chaine dans « titre + toutes les paroles ».
- * Cantiques d'abord, puis choeurs, dans l'ordre de numerotation.
+ * Resultats dans l'ordre de numerotation.
  */
 export function search(query: string): SearchResult[] {
   const q = normalize(query);
@@ -88,7 +82,7 @@ export function search(query: string): SearchResult[] {
 
   for (const entry of index ?? []) {
     if (results.length >= MAX_RESULTS) break;
-    const kind = entry.section === 'choeurs' ? 'Chœur' : 'Cantique';
+    const kind = 'Cantique';
 
     if (numeric) {
       if (!String(entry.n).startsWith(q)) continue;

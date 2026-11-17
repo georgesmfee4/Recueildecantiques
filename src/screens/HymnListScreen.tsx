@@ -1,6 +1,6 @@
 import { FlashList, type FlashListRef, type ListRenderItem } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { View } from 'react-native';
 import { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,7 +25,7 @@ const REVEAL_TOTAL = LISTE.reveal.staggeredRows * LISTE.reveal.step + LISTE.reve
 const keyExtractor = (item: ListEntry): string => `${item.section}:${item.n}`;
 
 export interface HymnListScreenProps {
-  /** `favoris` reunit cantiques et choeurs ; `liste` filtre par section. */
+  /** `favoris` n'affiche que les cantiques marques ; `liste` les affiche tous. */
   mode: 'liste' | 'favoris';
   /** Section initiale, conservee lors des allers-retours avec les Favoris. */
   initialSection?: Section;
@@ -33,12 +33,12 @@ export interface HymnListScreenProps {
 
 export function HymnListScreen({ mode, initialSection = 'cantiques' }: HymnListScreenProps) {
   const { colors } = useTheme();
-  const { favs, favsCh, isFavorite } = useFavorites();
+  const { favs, isFavorite } = useFavorites();
   const insets = useSafeAreaInsets();
   const router = useRouter();
 
   const favView = mode === 'favoris';
-  const [section, setSection] = useState<Section>(initialSection);
+  const section: Section = initialSection;
 
   const listRef = useRef<FlashListRef<ListEntry>>(null);
   const reveal = useSharedValue(0);
@@ -49,8 +49,8 @@ export function HymnListScreen({ mode, initialSection = 'cantiques' }: HymnListS
    * C'est ce qui donne l'impression que la liste ne charge pas.
    */
   const rows = useMemo(
-    () => (favView ? entriesFor(favs, favsCh) : getSection(section).entries),
-    [favView, favs, favsCh, section]
+    () => (favView ? entriesFor(favs) : getSection(section).entries),
+    [favView, favs, section]
   );
 
   const railStops = favView ? [] : getSection(section).railStops;
@@ -84,13 +84,9 @@ export function HymnListScreen({ mode, initialSection = 'cantiques' }: HymnListS
     [section]
   );
 
-  const goSection = useCallback(
-    (next: Section) => {
-      if (favView) router.replace({ pathname: '/liste', params: { section: next } });
-      else setSection(next);
-    },
-    [favView, router]
-  );
+  const goList = useCallback(() => {
+    if (favView) router.replace({ pathname: '/liste', params: { section } });
+  }, [favView, router, section]);
 
   const toggleFavView = useCallback(() => {
     if (favView) router.replace({ pathname: '/liste', params: { section } });
@@ -99,7 +95,7 @@ export function HymnListScreen({ mode, initialSection = 'cantiques' }: HymnListS
 
   // Les lignes sont memoisees : `extraData` previent FlashList qu'un changement
   // de favoris doit tout de meme les rafraichir.
-  const extraData = useMemo(() => ({ favs, favsCh }), [favs, favsCh]);
+  const extraData = useMemo(() => ({ favs }), [favs]);
 
   const renderItem = useCallback<ListRenderItem<ListEntry>>(
     ({ item, index }) => (
@@ -114,11 +110,9 @@ export function HymnListScreen({ mode, initialSection = 'cantiques' }: HymnListS
     [isFavorite, openEntry, reveal]
   );
 
-  const title = favView ? 'Favoris' : section === 'choeurs' ? 'Chœurs' : 'Cantiques';
-  const noun = favView ? 'favori' : section === 'choeurs' ? 'chœur' : 'cantique';
-  const count =
-    `${rows.length} ${noun}${rows.length > 1 ? 's' : ''}` +
-    (favView && favsCh.length ? ' · cantiques et chœurs' : '');
+  const title = favView ? 'Favoris' : 'Cantiques';
+  const noun = favView ? 'favori' : 'cantique';
+  const count = `${rows.length} ${noun}${rows.length > 1 ? 's' : ''}`;
 
   return (
     <Screen bottomInset={false}>
@@ -174,13 +168,8 @@ export function HymnListScreen({ mode, initialSection = 'cantiques' }: HymnListS
         >
           <Chip
             label="Cantiques"
-            active={!favView && section === 'cantiques'}
-            onPress={() => goSection('cantiques')}
-          />
-          <Chip
-            label="Chœurs"
-            active={!favView && section === 'choeurs'}
-            onPress={() => goSection('choeurs')}
+            active={!favView}
+            onPress={goList}
           />
           {/* L'icone suit la couleur du chip et non `gold` : sur le fond `primary`
               de l'etat actif, le jaune passerait sous le seuil de contraste dans

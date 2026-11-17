@@ -9,22 +9,19 @@ import type { IconName } from '../base/iconNames';
 export interface StatCardProps {
   primaryValue: number;
   primaryLabel: string;
-  secondaryValue: number;
-  secondaryLabel: string;
   pillLabel: string;
   pillIcon: IconName;
 }
 
 /**
- * Carte statistique de l'Accueil. Les deux nombres viennent toujours du recueil :
+ * Carte statistique de l'Accueil : un seul nombre, celui des cantiques. Il vient
+ * toujours du recueil :
  * aucun comptage n'est ecrit en dur, le passage a 250 ou 500 cantiques se fait
  * sans toucher a ce composant.
  */
 export function StatCard({
   primaryValue,
   primaryLabel,
-  secondaryValue,
-  secondaryLabel,
   pillLabel,
   pillIcon,
 }: StatCardProps) {
@@ -75,37 +72,6 @@ export function StatCard({
             style={{ marginTop: 5, opacity: stat.labelOpacity }}
           >
             {primaryLabel}
-          </AppText>
-        </View>
-
-        <View
-          style={{
-            width: stat.separator.width,
-            height: stat.separator.height,
-            backgroundColor: colors.onPrimaryContainer,
-            opacity: stat.separator.opacity,
-            marginBottom: 4,
-          }}
-        />
-
-        <View>
-          <AppText
-            variant="lyric"
-            size={stat.choeursSize}
-            weight={600}
-            lineHeight={1}
-            letterSpacing={stat.choeursLetterSpacing}
-            color={colors.onPrimaryContainer}
-          >
-            {secondaryValue}
-          </AppText>
-          <AppText
-            size={13}
-            weight={500}
-            color={colors.onPrimaryContainer}
-            style={{ marginTop: 5, opacity: stat.labelOpacity }}
-          >
-            {secondaryLabel}
           </AppText>
         </View>
       </View>

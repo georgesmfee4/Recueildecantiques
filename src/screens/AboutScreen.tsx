@@ -119,10 +119,6 @@ export function AboutScreen() {
           <AppText variant="lyric" size={A.intro.size} weight={600}>
             {TOTALS.cantiques} cantiques
           </AppText>{' '}
-          et{' '}
-          <AppText variant="lyric" size={A.intro.size} weight={600}>
-            {TOTALS.choeurs} chœurs
-          </AppText>{' '}
           pour la louange, l’adoration et l’édification de l’Église. Cette première édition est
           destinée aux cultes, aux réunions de prière et à la méditation personnelle.
         </AppText>

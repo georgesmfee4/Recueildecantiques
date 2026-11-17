@@ -50,7 +50,6 @@ export function ReaderScreen({ section, n }: ReaderScreenProps) {
   const bookmarkScale = useSharedValue(1);
 
   const entry = getEntry(section, n);
-  const isChoeur = section === 'choeurs';
   const favorite = isFavorite(section, n);
 
   // « Changement de cantique : le defilement revient en haut. »
@@ -91,7 +90,7 @@ export function ReaderScreen({ section, n }: ReaderScreenProps) {
   const onShare = useCallback(() => {
     if (!entry) return;
     buzz('action');
-    const kicker = `${isChoeur ? 'CHŒUR' : 'CANTIQUE'} ${n}`;
+    const kicker = `CANTIQUE ${n}`;
     const lyrics = getReaderBlocks(section, n)
       .map((block) =>
         block.kind === 'chorus'
@@ -102,7 +101,7 @@ export function ReaderScreen({ section, n }: ReaderScreenProps) {
     void Share.share({ message: `${kicker}\n${entry.title}\n\n${lyrics}` }).catch(
       () => undefined
     );
-  }, [buzz, entry, isChoeur, n, section]);
+  }, [buzz, entry, n, section]);
 
   if (!entry) {
     return (
@@ -127,7 +126,7 @@ export function ReaderScreen({ section, n }: ReaderScreenProps) {
         <EmptyState
           icon="search_off"
           title="Ce numéro n’existe pas"
-          subtitle={`Le recueil ne contient pas ${isChoeur ? 'de chœur' : 'de cantique'} n° ${n}.`}
+          subtitle={`Le recueil ne contient pas de cantique n° ${n}.`}
         />
       </Screen>
     );
@@ -136,7 +135,7 @@ export function ReaderScreen({ section, n }: ReaderScreenProps) {
   const blocks = getReaderBlocks(section, n);
   const { prev, next } = neighbours(section, n);
 
-  // Chants sans aucun couplet numerote — les choeurs, et les cantiques 30 et 38
+  // Chants sans aucun couplet numerote — les cantiques 30 et 38
   // ecrits en texte continu : le texte prend toute la largeur.
   const numbered = blocks.some((b) => b.kind === 'verse' && b.n !== undefined);
   const hasChorus = blocks.some((b) => b.kind === 'chorus');
@@ -233,7 +232,7 @@ export function ReaderScreen({ section, n }: ReaderScreenProps) {
             letterSpacing={appBar.kickerLetterSpacing}
             numberOfLines={1}
           >
-            {isChoeur ? 'CHŒUR' : 'CANTIQUE'} {n}
+            CANTIQUE {n}
           </AppText>
           <AppText
             variant="lyric"

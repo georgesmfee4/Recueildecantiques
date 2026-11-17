@@ -1,10 +1,10 @@
-import { cantiqueMeta, choeurMeta, choeurTitle } from '../lib/meta';
+import { cantiqueMeta } from '../lib/meta';
 import rawRecueil from './recueil.json';
-import type { Cantique, Choeur, Recueil, Section } from './types';
+import type { Cantique, Recueil, Section } from './types';
 
 const data = rawRecueil as Recueil;
 
-export const SECTIONS: readonly Section[] = ['cantiques', 'choeurs'];
+export const SECTIONS: readonly Section[] = ['cantiques'];
 
 /** Une ligne de liste, prete a afficher : plus aucun calcul au moment du rendu. */
 export interface ListEntry {
@@ -14,7 +14,7 @@ export interface ListEntry {
   meta: string;
 }
 
-/** Bloc normalise pour l'ecran Lecture, cantiques et choeurs confondus. */
+/** Bloc normalise pour l'ecran Lecture. */
 export type ReaderBlock =
   | { kind: 'verse'; n?: number; lines: string[] }
   | { kind: 'chorus'; lines: string[] };
@@ -40,8 +40,8 @@ function buildSection(entries: ListEntry[]): SectionData {
     positionOf.set(entry.n, i);
   });
 
-  // Borne calculee sur le dernier numero, pas sur le nombre d'elements : les
-  // choeurs vont jusqu'a 75 alors qu'ils ne sont que 74 (le 26 manque).
+  // Borne calculee sur le dernier numero, pas sur le nombre d'elements : un
+  // trou dans la numerotation ne doit pas raccourcir le rail.
   const last = entries.length ? entries[entries.length - 1].n : 1;
   const railStops: number[] = [];
   for (let k = 1; k <= last; k += RAIL_STEP) railStops.push(k);
@@ -58,7 +58,6 @@ function buildSection(entries: ListEntry[]): SectionData {
 
 // Index construits une seule fois au chargement du module.
 const cantiqueByNumber = new Map<number, Cantique>(data.cantiques.map((c) => [c.n, c]));
-const choeurByNumber = new Map<number, Choeur>(data.choeurs.map((c) => [c.n, c]));
 
 const sections: Record<Section, SectionData> = {
   cantiques: buildSection(
@@ -67,14 +66,6 @@ const sections: Record<Section, SectionData> = {
       n: c.n,
       title: c.title,
       meta: cantiqueMeta(c),
-    }))
-  ),
-  choeurs: buildSection(
-    data.choeurs.map((c) => ({
-      section: 'choeurs' as const,
-      n: c.n,
-      title: choeurTitle(c),
-      meta: choeurMeta(c),
     }))
   ),
 };
@@ -90,18 +81,16 @@ export const exists = (section: Section, n: number): boolean =>
 /** Nombres affiches par la carte statistique. Jamais ecrits en dur. */
 export const TOTALS: Record<Section, number> = {
   cantiques: sections.cantiques.total,
-  choeurs: sections.choeurs.total,
 };
 
 /** Borne du clavier « Aller à un numéro », par section. */
 export const MAX_NUMBER: Record<Section, number> = {
   cantiques: sections.cantiques.maxNumber,
-  choeurs: sections.choeurs.maxNumber,
 };
 
 /**
  * Voisins circulaires dans la section. On avance d'un rang dans la liste et non
- * de 1 en numero, sinon le trou des choeurs (26) casserait l'enchainement.
+ * de 1 en numero, sinon un trou dans la numerotation casserait l'enchainement.
  */
 export function neighbours(section: Section, n: number): { prev: number; next: number } {
   const { entries, positionOf } = sections[section];
@@ -127,19 +116,8 @@ export function railTarget(section: Section, stop: number): number {
   return i === -1 ? Math.max(0, entries.length - 1) : i;
 }
 
-/**
- * Contenu a afficher en lecture.
- *
- * Un choeur se rend comme un chant entier : un simple bloc de paroles. Le
- * prototype l'affichait en carte de refrain avec l'etiquette « REFRAIN », ce qui
- * etait trompeur — un choeur n'est pas le refrain de quelque chose, c'est le
- * chant complet.
- */
-export function getReaderBlocks(section: Section, n: number): ReaderBlock[] {
-  if (section === 'choeurs') {
-    const choeur = choeurByNumber.get(n);
-    return choeur ? [{ kind: 'verse', lines: choeur.l }] : [];
-  }
+/** Contenu a afficher en lecture. */
+export function getReaderBlocks(_section: Section, n: number): ReaderBlock[] {
   const cantique = cantiqueByNumber.get(n);
   if (!cantique) return [];
   return cantique.parts.map((p) =>
@@ -151,13 +129,10 @@ export function getReaderBlocks(section: Section, n: number): ReaderBlock[] {
 }
 
 export const getCantique = (n: number): Cantique | undefined => cantiqueByNumber.get(n);
-export const getChoeur = (n: number): Choeur | undefined => choeurByNumber.get(n);
 
-/** Cantiques puis choeurs, pour l'ecran Favoris qui reunit les deux sections. */
-export function entriesFor(favs: readonly number[], favsCh: readonly number[]): ListEntry[] {
-  const pick = (section: Section, numbers: readonly number[]) =>
-    numbers
-      .map((n) => sections[section].byNumber.get(n))
-      .filter((e): e is ListEntry => e !== undefined);
-  return [...pick('cantiques', favs), ...pick('choeurs', favsCh)];
+/** Lignes de l'ecran Favoris, dans l'ordre des numeros enregistres. */
+export function entriesFor(favs: readonly number[]): ListEntry[] {
+  return favs
+    .map((n) => sections.cantiques.byNumber.get(n))
+    .filter((e): e is ListEntry => e !== undefined);
 }

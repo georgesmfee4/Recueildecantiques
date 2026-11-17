@@ -376,9 +376,6 @@ export const ACCUEIL = {
     circle: { size: 120, top: -26, right: -28, opacity: 0.09 },
     cantiquesSize: 46,
     cantiquesLetterSpacing: -1.5,
-    choeursSize: 30,
-    choeursLetterSpacing: -0.8,
-    separator: { width: 1, height: 42, opacity: 0.18 },
     labelOpacity: 0.85,
   },
   mainButton: { height: 60, radius: RADIUS.button },
@@ -406,7 +403,7 @@ export const ACCUEIL = {
   verse: { radius: RADIUS.card, quoteIconSize: 22, textSize: 15.5, lineHeight: 1.6 },
 } as const;
 
-/** Ecran de liste, partage par « Cantiques », « Chœurs » et « Favoris ». */
+/** Ecran de liste, partage par « Cantiques » et « Favoris ». */
 export const LISTE = {
   header: { paddingH: 12, paddingBottom: 10, appBarHeight: 52, gap: 4 },
   /** Champ factice : il ouvre l'ecran Recherche au lieu de saisir. */
@@ -434,7 +431,7 @@ export const LISTE = {
   reveal: { step: 22, duration: 240, staggeredRows: 10, offset: 10 },
 } as const;
 
-/** Ecran de lecture d'un cantique ou d'un choeur. */
+/** Ecran de lecture d'un cantique. */
 export const LECTURE = {
   /**
    * En-tete fixe sur deux registres : rangee d'actions, puis numero et titre.
