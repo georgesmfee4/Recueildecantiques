@@ -6,8 +6,8 @@
 > et le slug npm `recueil-cantiques` écrivent partout « Recueil de Cantiques » : **c'est une
 > erreur de la spec**, confirmée par le document source de l'auteur
 > (`RECUEIL DE CHANTS 1ère Edition.docx`). Ne jamais afficher « Recueil de Cantiques » dans
-> l'interface. Les libellés de *contenu* ne changent pas : « 130 cantiques », « CANTIQUE 87 »,
-> « chœurs » restent tels quels.
+> l'interface. Les libellés de *contenu* ne changent pas : « 130 cantiques », « CANTIQUE 87 »
+> restent tels quels.
 
 Application React Native (Expo, TypeScript) de consultation d'un recueil de cantiques,
 **100 % hors ligne**. La référence visuelle est `design_handoff_recueil_cantiques/` :
@@ -45,8 +45,10 @@ Ces choix contredisent le prototype ou son `README.md`. Ils sont volontaires.
   « Cantique 87 sur 130 » sont supprimés — ils chargeaient le visuel.
 - **Accès direct par numéro : Accueil et Lecture uniquement.** La pastille « N° » de l'écran
   Liste est retirée.
-- **Un chœur s'affiche comme un chant entier** : bloc de paroles en romain, pleine largeur,
-  et non comme une carte de refrain étiquetée « REFRAIN ».
+- **Chœurs supprimés.** L'application ne contient plus que les cantiques : plus de section
+  « Chœurs », plus de chip, plus de sélecteur Cantique / Chœur dans le clavier, et la carte
+  de l'Accueil n'affiche qu'un seul nombre (les cantiques). Le type `Section` ne vaut plus
+  que `'cantiques'`. Voir `docs/SUPPRESSION-DES-CHOEURS.md`. Ne pas les réintroduire.
 - **Recherche** : ligatures (`œ`, `æ`) dépliées et apostrophe traitée comme séparateur, sans
   quoi « choeur » et « clin d oeil » ne trouvaient rien. Extraits découpés via une table de
   correspondance de positions, le prototype pouvant décaler le surlignage.
